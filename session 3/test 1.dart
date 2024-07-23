@@ -1,18 +1,27 @@
 void main() {
   try {
-    misbehave();
-    double.parse('1,1');
-    throw 'fault';
+    noSuchMethodError();
+
+    rangeError(5);
+
+    formatException();
+
+    nullCheckException();
+
+    //throw 'fault';
+
+    print('Enf of try');
   } on FormatException catch (e) {
     print(e);
   } on String {
     print('string exception');
   } catch (e) {
-    print('unknown exception');
+    print('unknown exception: $e');
   }
+  print('End of main');
 }
 
-void misbehave() {
+void noSuchMethodError() {
   try {
     dynamic foo = true;
     print(foo++); // Runtime error
@@ -20,4 +29,18 @@ void misbehave() {
     print('misbehave() partially handled ${e.runtimeType}.');
     rethrow; // Allow callers to see the exception.
   }
+}
+
+void rangeError(int i) {
+  var list = [1, 2, 3];
+  print(list[i]);
+}
+
+void formatException() {
+  print(double.parse('1,1'));
+}
+
+void nullCheckException() {
+  String? text;
+  print(text!);
 }
